@@ -16,6 +16,13 @@
             <column name="quantity" type="bigint">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="warehouse"
@@ -37,6 +44,13 @@
             <column name="product_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="purchases"
@@ -55,10 +69,20 @@
 
     <changeSet id="1.1.2" author="egor.korolyov">
         <createTable tableName="orders">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="order_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="purchase_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
         </createTable>

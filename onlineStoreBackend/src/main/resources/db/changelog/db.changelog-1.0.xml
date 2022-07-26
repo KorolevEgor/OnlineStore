@@ -13,13 +13,14 @@
             <column name="name" type="varchar2(30)">
                 <constraints nullable="false" unique="true"/>
             </column>
+            <column name="status" type="varchar2(30)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
             <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="varchar2(30)" defaultValue="ACTIVE">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -43,13 +44,14 @@
             <column name="password" type="varchar2(150)">
                 <constraints nullable="false"/>
             </column>
+            <column name="status" type="varchar2(30)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
             <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="status" type="varchar2(30)" defaultValue="ACTIVE">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -57,6 +59,13 @@
         <createTable tableName="user_roles">
             <column name="user_id" type="bigint"/>
             <column name="role_id" type="bigint"/>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="user_roles"
@@ -81,6 +90,13 @@
             <column name="name" type="varchar2(70)">
                 <constraints nullable="false"/>
             </column>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="products">
@@ -95,11 +111,25 @@
                 <constraints nullable="false"/>
             </column>
             <column name="discount_percentage" type="float" defaultValue="0"/>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="product_categories">
             <column name="product_id" type="bigint"/>
             <column name="category_id" type="bigint"/>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="product_categories"
