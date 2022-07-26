@@ -1,6 +1,7 @@
 package com.korolyovegor.onlineStoreBackend.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "products")
 @Data
+@NoArgsConstructor
 public class Product extends BaseEntity {
 
     @Column(name = "name", nullable = false, length = 100)

@@ -2,6 +2,7 @@ package com.korolyovegor.onlineStoreBackend.model;
 
 import com.korolyovegor.onlineStoreBackend.model.security.User;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "purchases")
 @Data
+@NoArgsConstructor
 public class Purchase extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

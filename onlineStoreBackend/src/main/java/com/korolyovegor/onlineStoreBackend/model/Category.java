@@ -1,6 +1,7 @@
 package com.korolyovegor.onlineStoreBackend.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "categories")
 @Data
+@NoArgsConstructor
 public class Category extends BaseEntity {
 
     @Column(name = "parent_id")

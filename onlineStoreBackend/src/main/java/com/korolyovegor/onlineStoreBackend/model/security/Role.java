@@ -2,6 +2,7 @@ package com.korolyovegor.onlineStoreBackend.model.security;
 
 import com.korolyovegor.onlineStoreBackend.model.BaseEntity;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -12,6 +13,7 @@ import java.util.Set;
         @Index(name = "roles_name_key", columnList = "name", unique = true)
 })
 @Data
+@NoArgsConstructor
 public class Role extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
