@@ -3,6 +3,7 @@ package com.korolyovegor.onlineStoreBackend.model.security;
 import com.korolyovegor.onlineStoreBackend.model.BaseEntity;
 import com.korolyovegor.onlineStoreBackend.model.Purchase;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -28,8 +29,9 @@ public class User extends BaseEntity {
     @Column(name = "password", nullable = false, length = 150)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 30)
-    private String status;
+    private UserStatusType status;
 
     @OneToMany(mappedBy = "user")
     private Set<Purchase> purchases = new LinkedHashSet<>();

@@ -14,11 +14,13 @@ import java.util.Set;
 @Data
 public class Role extends BaseEntity {
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 30)
-    private String name;
+    private RoleNameType name;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 30)
-    private String status;
+    private RoleStatusType status;
 
     @ManyToMany
     @JoinTable(name = "user_roles",
