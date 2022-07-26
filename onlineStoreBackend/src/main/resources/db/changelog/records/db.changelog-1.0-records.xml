@@ -1,0 +1,247 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1.0.2" author="egor.korolyov">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.3" author="egor.korolyov">
+        <!--      [dev only] password: admin      -->
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="first_name" value="admin"/>
+            <column name="last_name" value="admin"/>
+            <column name="email" value="admin@admin.com"/>
+            <column name="password" value="{bcrypt}$2a$10$rJoskjVQuUyKgSthG0w6burb5jh5.Mkr.RG//gBo5LXrIFT5pZpL."/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <!--      [dev only] password: ivan      -->
+        <insert tableName="users">
+            <column name="username" value="test_user_ivan"/>
+            <column name="first_name" value="ivan"/>
+            <column name="last_name" value="ivanov"/>
+            <column name="email" value="i.ivanov@gmail.com"/>
+            <column name="password" value="{bcrypt}$2a$10$a9SuDYydSw2hIvY55L9KreNiS9pTmiBEX3fi8JoBOpXwb2w3PaVLm"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <!--      [dev only] password: petr      -->
+        <insert tableName="users">
+            <column name="username" value="test_user_petr"/>
+            <column name="first_name" value="petr"/>
+            <column name="last_name" value="petrov"/>
+            <column name="email" value="p.petrov@gmail.com"/>
+            <column name="password" value="{bcrypt}$2a$12$jqZV3187zmEmwBPMEV3y8.xbOe4912XAi5FpIZOXGPCoM0X18db0m"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.4" author="egor.korolyov">
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_roles">
+            <column name="user_id" value="2"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_roles">
+            <column name="user_id" value="3"/>
+            <column name="role_id" value="2"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.5" author="egor.korolyov">
+        <insert tableName="categories">
+            <column name="parent_id" value="0"/>
+            <column name="name" value="Название магазина"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Электроника"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="2"/>
+            <column name="name" value="Смартфоны и гаджеты"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="3"/>
+            <column name="name" value="Смартфоны"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="3"/>
+            <column name="name" value="Умные часы и браслеты"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="2"/>
+            <column name="name" value="Телевизоры и аксессуары"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="2"/>
+            <column name="name" value="Наушники и аудиотехника"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Компьютеры"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Бытовая техника"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Одежда и обувь"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Красота и гигиена"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Детские товары"/>
+        </insert>
+
+        <insert tableName="categories">
+            <column name="parent_id" value="1"/>
+            <column name="name" value="Дом"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.6" author="egor.korolyov">
+        <insert tableName="products">
+            <column name="name" value="Смартфон Samsung Galaxy A52 8/128 ГБ, синий"/>
+            <column name="description" value="description"/>
+            <column name="price" value="26670"/>
+            <column name="discount_percentage" value="11"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="1"/>
+            <column name="category_id" value="4"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Смартфон Xiaomi 12 Pro 12/256 ГБ Global, черный"/>
+            <column name="description" value="description"/>
+            <column name="price" value="73790"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="2"/>
+            <column name="category_id" value="4"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Смартфон Apple iPhone 13 Pro Max 128 ГБ, Альпийский зеленый"/>
+            <column name="description" value="description"/>
+            <column name="price" value="99349"/>
+            <column name="discount_percentage" value="10"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="3"/>
+            <column name="category_id" value="4"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.7" author="egor.korolyov">
+        <insert tableName="products">
+            <column name="name" value="Умный браслет Xiaomi Mi Band 7, черный"/>
+            <column name="description" value="description"/>
+            <column name="price" value="3440"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="4"/>
+            <column name="category_id" value="5"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Умные часы Garmin MARQ Athlete Wi-Fi NFC, черный"/>
+            <column name="description" value="description"/>
+            <column name="price" value="139999"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="5"/>
+            <column name="category_id" value="5"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="Умные часы Apple Watch Series 7 45 мм Aluminium Case, темная ночь"/>
+            <column name="description" value="description"/>
+            <column name="price" value="36290"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="6"/>
+            <column name="category_id" value="5"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.8" author="egor.korolyov">
+        <insert tableName="products">
+            <column name="name" value="32'' Телевизор Xiaomi Mi TV P1 32 2021 LED RU, черный"/>
+            <column name="description" value="description"/>
+            <column name="price" value="19990"/>
+            <column name="discount_percentage" value="20"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="7"/>
+            <column name="category_id" value="6"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="55'' Телевизор Xiaomi Mi TV P1 55 2021 HDR, LED RU, титан"/>
+            <column name="description" value="description"/>
+            <column name="price" value="46470"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="8"/>
+            <column name="category_id" value="6"/>
+        </insert>
+
+        <insert tableName="products">
+            <column name="name" value="50'' Телевизор Xiaomi Mi TV P1 50 2021 HDR, LED, black"/>
+            <column name="description" value="description"/>
+            <column name="price" value="37780"/>
+        </insert>
+        <insert tableName="product_categories">
+            <column name="product_id" value="9"/>
+            <column name="category_id" value="6"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
