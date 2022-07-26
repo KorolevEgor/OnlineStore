@@ -5,6 +5,180 @@
             https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 
+    <changeSet id="1.0.0" author="egor.korolyov">
+        <createTable tableName="roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar2(30)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar2(30)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
 
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar2(30)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="varchar2(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="first_name" type="varchar2(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar2(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar2(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar2(30)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="user_roles">
+            <column name="user_id" type="bigint"/>
+            <column name="role_id" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user_roles"
+                                 baseColumnNames="user_id"
+                                 constraintName="FK_many_to_many_user_roles_to_users"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_roles"
+                                 baseColumnNames="role_id"
+                                 constraintName="FK_many_to_many_user_roles_to_roles"
+                                 referencedTableName="roles"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="1.0.1" author="egor.korolyov">
+        <createTable tableName="categories">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="bigint"/>
+            <column name="name" type="varchar2(70)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="products">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar2(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="description" type="varchar2(1000)"/>
+        </createTable>
+
+        <createTable tableName="product_categories">
+            <column name="product_id" type="bigint"/>
+            <column name="category_id" type="bigint"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="product_categories"
+                                 baseColumnNames="product_id"
+                                 constraintName="FK_many_to_many_product_categories_to_product"
+                                 referencedTableName="products"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_roles"
+                                 baseColumnNames="category_id"
+                                 constraintName="FK_many_to_many_product_categories_to_category"
+                                 referencedTableName="categories"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="1.0.2" author="egor.korolyov">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.3" author="egor.korolyov">
+        <!--      [dev only] password: admin      -->
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="first_name" value="admin"/>
+            <column name="last_name" value="admin"/>
+            <column name="email" value="admin@admin.com"/>
+            <column name="password" value="{bcrypt}$2a$10$rJoskjVQuUyKgSthG0w6burb5jh5.Mkr.RG//gBo5LXrIFT5pZpL."/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <!--      [dev only] password: ivan      -->
+        <insert tableName="users">
+            <column name="username" value="test_user_ivan"/>
+            <column name="first_name" value="ivan"/>
+            <column name="last_name" value="ivanov"/>
+            <column name="email" value="i.ivanov@gmail.com"/>
+            <column name="password" value="{bcrypt}$2a$10$a9SuDYydSw2hIvY55L9KreNiS9pTmiBEX3fi8JoBOpXwb2w3PaVLm"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+
+        <!--      [dev only] password: petr      -->
+        <insert tableName="users">
+            <column name="username" value="test_user_petr"/>
+            <column name="first_name" value="petr"/>
+            <column name="last_name" value="petrov"/>
+            <column name="email" value="p.petrov@gmail.com"/>
+            <column name="password" value="{bcrypt}$2a$12$jqZV3187zmEmwBPMEV3y8.xbOe4912XAi5FpIZOXGPCoM0X18db0m"/>
+            <column name="status" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="1.0.4" author="egor.korolyov">
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_roles">
+            <column name="user_id" value="2"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_roles">
+            <column name="user_id" value="3"/>
+            <column name="role_id" value="2"/>
+        </insert>
+    </changeSet>
+
+    
 
 </databaseChangeLog>
