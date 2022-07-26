@@ -1,0 +1,73 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet id="1.1.0" author="egor.korolyov">
+        <createTable tableName="warehouse">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="quantity" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="warehouse"
+                                 baseColumnNames="product_id"
+                                 constraintName="FK_one_to_one_warehouse_to_product"
+                                 referencedTableName="products"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="1.1.1" author="egor.korolyov">
+        <createTable tableName="purchases">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="purchases"
+                                 baseColumnNames="user_id"
+                                 constraintName="FK_many_to_one_purchase_to_user"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="purchases"
+                                 baseColumnNames="product_id"
+                                 constraintName="FK_many_to_one_purchase_to_product"
+                                 referencedTableName="products"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+    <changeSet id="1.1.2" author="egor.korolyov">
+        <createTable tableName="orders">
+            <column name="order_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="purchase_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="orders"
+                                 baseColumnNames="purchase_id"
+                                 constraintName="FK_one_to_many_order_to_purchase"
+                                 referencedTableName="purchases"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
