@@ -4,7 +4,6 @@ import com.korolyovegor.onlineStoreBackend.model.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -17,12 +16,6 @@ public class Role extends BaseEntity {
 
     @Column(name = "name", nullable = false, length = 30)
     private String name;
-
-    @Column(name = "created", nullable = false)
-    private Instant created;
-
-    @Column(name = "updated", nullable = false)
-    private Instant updated;
 
     @Column(name = "status", nullable = false, length = 30)
     private String status;

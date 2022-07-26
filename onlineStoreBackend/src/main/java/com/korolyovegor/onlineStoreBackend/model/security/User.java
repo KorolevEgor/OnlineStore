@@ -5,7 +5,6 @@ import com.korolyovegor.onlineStoreBackend.model.Purchase;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -28,12 +27,6 @@ public class User extends BaseEntity {
 
     @Column(name = "password", nullable = false, length = 150)
     private String password;
-
-    @Column(name = "created", nullable = false)
-    private Instant created;
-
-    @Column(name = "updated", nullable = false)
-    private Instant updated;
 
     @Column(name = "status", nullable = false, length = 30)
     private String status;
