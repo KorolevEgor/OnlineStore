@@ -5,6 +5,7 @@ import com.korolyovegor.onlineStoreBackend.repository.RoleRepository;
 import com.korolyovegor.onlineStoreBackend.repository.UserRepository;
 import com.korolyovegor.onlineStoreBackend.security.LoginAttemptService;
 import com.korolyovegor.onlineStoreBackend.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 public class JwtUserDetailsService implements UserService, UserDetailsService {
 
@@ -69,15 +71,14 @@ public class JwtUserDetailsService implements UserService, UserDetailsService {
     @Override
     public User register(User user) {
         Role role = roleRepository.findByName(RoleNameType.ROLE_USER);
-        Set<Role> userRoles = Set.of(role);
+        List<Role> userRoles = List.of(role);
 
         user.setRoles(userRoles);
         user.setPassword(encoder.encode(user.getPassword()));
         user.setStatus(UserStatusType.ACTIVE);
 
-//        System.out.println(user);
         User savedUser = userRepository.save(user);
-//        System.out.println(savedUser);
+        log.info("user with username " + savedUser.getUsername() + " has been registered");
         return savedUser;
     }
 

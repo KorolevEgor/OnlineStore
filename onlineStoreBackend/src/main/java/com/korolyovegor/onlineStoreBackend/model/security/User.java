@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,10 +35,22 @@ public class User extends BaseEntity {
     @Column(name = "status", nullable = false, length = 30)
     private UserStatusType status;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Purchase> purchases = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private Set<Purchase> purchases = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "users")
-    private Set<Role> roles = new LinkedHashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
+
+    public User(String username, String email, String firstName, String lastName, String password, UserStatusType status) {
+        this.username = username;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.status = status;
+    }
 
 }

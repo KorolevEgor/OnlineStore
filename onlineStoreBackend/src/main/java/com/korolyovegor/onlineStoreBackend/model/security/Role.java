@@ -1,11 +1,14 @@
 package com.korolyovegor.onlineStoreBackend.model.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.korolyovegor.onlineStoreBackend.model.BaseEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,7 +17,7 @@ import java.util.Set;
 })
 @Data
 @NoArgsConstructor
-public class Role extends BaseEntity {
+public class Role extends BaseEntity implements GrantedAuthority {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false, length = 30)
@@ -24,10 +27,26 @@ public class Role extends BaseEntity {
     @Column(name = "status", nullable = false, length = 30)
     private RoleStatusType status;
 
-    @ManyToMany
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> users = new LinkedHashSet<>();
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<User> users;
 
+    @Override
+    public String getAuthority() {
+        return name.toString();
+    }
+
+    public Role(RoleNameType name, RoleStatusType status) {
+        this.name = name;
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + super.getId() +
+                ", name=" + name +
+                ", status=" + status +
+                '}';
+    }
 }
