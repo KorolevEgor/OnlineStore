@@ -34,6 +34,22 @@
 
 
     <changeSet id="1.1.1" author="egor.korolyov">
+        <createTable tableName="orders">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="1.1.2" author="egor.korolyov">
         <createTable tableName="purchases">
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -42,6 +58,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
 
@@ -64,34 +83,13 @@
                                  constraintName="FK_many_to_one_purchase_to_product"
                                  referencedTableName="products"
                                  referencedColumnNames="id"/>
-    </changeSet>
 
-
-    <changeSet id="1.1.2" author="egor.korolyov">
-        <createTable tableName="orders">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="order_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="purchase_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="created" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="updated" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addForeignKeyConstraint baseTableName="orders"
-                                 baseColumnNames="purchase_id"
-                                 constraintName="FK_one_to_many_order_to_purchase"
-                                 referencedTableName="purchases"
+        <addForeignKeyConstraint baseTableName="purchases"
+                                 baseColumnNames="order_id"
+                                 constraintName="FK_many_to_one_purchase_to_order"
+                                 referencedTableName="orders"
                                  referencedColumnNames="id"/>
     </changeSet>
+
 
 </databaseChangeLog>

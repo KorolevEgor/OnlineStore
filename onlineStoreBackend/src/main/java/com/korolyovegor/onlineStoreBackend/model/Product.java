@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -30,12 +29,12 @@ public class Product extends BaseEntity {
     private Warehouse warehouse;
 
     @OneToMany(mappedBy = "product")
-    private Set<Purchase> purchases = new LinkedHashSet<>();
+    private List<Purchase> purchases;
 
     @ManyToMany
     @JoinTable(name = "product_categories",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new LinkedHashSet<>();
+    private List<Category> categories;
 
 }

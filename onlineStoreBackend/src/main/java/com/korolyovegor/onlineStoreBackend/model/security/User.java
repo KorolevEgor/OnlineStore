@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -35,8 +33,8 @@ public class User extends BaseEntity {
     @Column(name = "status", nullable = false, length = 30)
     private UserStatusType status;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-//    private Set<Purchase> purchases = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Purchase> purchases;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",

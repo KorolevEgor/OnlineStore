@@ -45,57 +45,42 @@
 
 
     <changeSet id="1.1.4" author="egor.korolyov">
+        <insert tableName="orders">
+            <column name="id" value="1"/>
+        </insert>
         <insert tableName="purchases">
             <column name="user_id" value="2"/>
             <column name="product_id" value="1"/>
+            <column name="order_id" value="1"/>
         </insert>
         <insert tableName="purchases">
             <column name="user_id" value="2"/>
             <column name="product_id" value="4"/>
+            <column name="order_id" value="1"/>
         </insert>
         <insert tableName="purchases">
             <column name="user_id" value="2"/>
             <column name="product_id" value="7"/>
+            <column name="order_id" value="1"/>
+        </insert>
+
+        <insert tableName="orders">
+            <column name="id" value="2"/>
         </insert>
         <insert tableName="purchases">
             <column name="user_id" value="3"/>
             <column name="product_id" value="3"/>
+            <column name="order_id" value="2"/>
         </insert>
         <insert tableName="purchases">
             <column name="user_id" value="3"/>
             <column name="product_id" value="6"/>
+            <column name="order_id" value="2"/>
         </insert>
         <insert tableName="purchases">
             <column name="user_id" value="3"/>
             <column name="product_id" value="9"/>
-        </insert>
-    </changeSet>
-
-
-    <changeSet id="1.1.5" author="egor.korolyov">
-        <insert tableName="orders">
-            <column name="order_id" value="1"/>
-            <column name="purchase_id" value="1"/>
-        </insert>
-        <insert tableName="orders">
-            <column name="order_id" value="1"/>
-            <column name="purchase_id" value="2"/>
-        </insert>
-        <insert tableName="orders">
-            <column name="order_id" value="1"/>
-            <column name="purchase_id" value="3"/>
-        </insert>
-        <insert tableName="orders">
             <column name="order_id" value="2"/>
-            <column name="purchase_id" value="1"/>
-        </insert>
-        <insert tableName="orders">
-            <column name="order_id" value="2"/>
-            <column name="purchase_id" value="2"/>
-        </insert>
-        <insert tableName="orders">
-            <column name="order_id" value="2"/>
-            <column name="purchase_id" value="3"/>
         </insert>
     </changeSet>
 
